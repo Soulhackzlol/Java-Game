@@ -10,6 +10,7 @@ public class Main {
    *   Gives a second chance to the player if he is about to lose.
    *   Chance of it happening can be changed.
    *   First one to reach position 30+ wins.
+   *   Epic code by s1 (#fuckjsongang)
    */
 
   /* commonVars */
@@ -29,7 +30,7 @@ public class Main {
   public static int o_secondChance = secondChance; // Second-chance chance - backs up the old var for the reset
   public static int menuOption = 0; // Stores our menu choice
 
-  // Util functions
+  // Util functions // 
   public static void println(String text) { // Text animation + random colors (if party mode = 1)
     for (int i = 0; i < text.length(); i++) {
       if (partyMode == 1) {
@@ -53,6 +54,8 @@ public class Main {
     }
   }
 
+
+  // Actual gameplay functions lol // 
   public static void menu() {
     // Utils
     Scanner U_Scan = new Scanner(System.in);
@@ -63,7 +66,7 @@ public class Main {
     status = 0;
     fix = 0;
     dice = 0;
-    secondChance = o_secondChance; 
+    secondChance = o_secondChance;
     posPlayer[0] = 0;
     posPlayer[1] = 0;
     p_posPlayer[0] = 0;
@@ -179,7 +182,7 @@ public class Main {
           rnd.nextInt(11) > secondChance
         ) {
           // This is not going to be called if our secondChance isn't true!
-          System.err.println("[debug] second chance...");
+          // System.err.println("[debug] second chance...");
 
           // Reset our last prediction.
           p_posPlayer[turn] -= dice;
@@ -208,7 +211,7 @@ public class Main {
         System.out.flush();
       }
     }
-    
+
     // check score and print winner - end game
     if (posPlayer[0] >= 30) {
       System.out.println("Player 1 Wins!");
@@ -218,7 +221,7 @@ public class Main {
   }
 
   public static void main(String[] args) {
-    // Declaring the color
+    // Declaring the color - i forgo to say: theres prob a better way but cba :D
     COLORS[0] = "\u001B[33m";
     COLORS[1] = "\u001B[32m";
     COLORS[2] = "\u001B[36m";
@@ -230,11 +233,10 @@ public class Main {
     System.out.print("\033[H\033[2J");
     System.out.flush();
 
-    while(menuOption != 3){
-        menu();
-        if (menuOption == 2) partyMode = 1;
-        if (menuOption == 1 || menuOption == 2) gameLoop();
+    while (menuOption != 3) {
+      menu();
+      if (menuOption == 2) partyMode = 1;
+      if (menuOption == 1 || menuOption == 2) gameLoop();
     }
-    
   }
 }
