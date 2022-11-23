@@ -78,6 +78,7 @@ public class Main {
       sleep(30);
     }
     System.out.println();
+    
     // Draw menu text
     println("Java-Game Menu!");
     println("1 - Play");
@@ -130,7 +131,7 @@ public class Main {
             status = 1;
             break;
           }
-          // Simple way of not drawing both players int the same position
+          // Simple way of not drawing both players in the same position
           else if (
             posPlayer[1] == posPlayer[0] && posPlayer[0] == i && fix == 0
           ) {
@@ -171,12 +172,12 @@ public class Main {
         dice = rnd.nextInt(5) + 1;
 
         // [debug] print our first gen
-        System.err.println("[debug] first_gen " + dice);
+        // System.err.println("[debug] first_gen " + dice);
 
         // "Predict" our next movement
         p_posPlayer[turn] += dice;
 
-        // Check if number will land on mina and give a chance of that not happening
+        // Check if number will land on mine and give a chance of that not happening
         if (
           contains(posMines, p_posPlayer[turn]) &&
           rnd.nextInt(11) > secondChance
