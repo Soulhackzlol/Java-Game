@@ -9,7 +9,7 @@ public class Main {
    *   Features a small "prediction" (?) system.
    *   Gives a second chance to the player if he is about to lose.
    *   Chance of it happening can be changed.
-   *   First one to reach position 30+ wins.
+   *   First one to reach position maxScore+ wins.
    *   Epic code by s1 (#fuckjsongang)
    */
 
@@ -18,7 +18,7 @@ public class Main {
   public static final String[] COLORS = new String[6];
 
   /* gameVars */
-  public static int[] posMines = new int[4]; // Number of mines to generate
+  public static int[] posMines = new int[10]; // Number of mines to generate
   public static int[] posPlayer = new int[2]; // Number of players (should always be 2)
   public static int[] p_posPlayer = new int[2]; // Variable to store our "prediction"
   public static int turn = 0; // Stores who is currently playing
@@ -29,6 +29,7 @@ public class Main {
   public static int secondChance = 4; // Second-chance chance - 0 will make it trigger 100%, max is 10 (0%)
   public static int o_secondChance = secondChance; // Second-chance chance - backs up the old var for the reset
   public static int menuOption = 0; // Stores our menu choice
+  public static int maxScore = 30; // Max score or rows number
 
   // Util functions // 
   public static void println(String text) { // Text animation + random colors (if party mode = 1)
@@ -110,12 +111,12 @@ public class Main {
     }
 
     // Game loop - becomes inactive when a player wins or when status != 0
-    while (posPlayer[0] < 30 && posPlayer[1] < 30 && status == 0) {
+    while (posPlayer[0] < maxScore && posPlayer[1] < maxScore && status == 0) {
       // Debug way of checking positions, I just don't like it but can be added to the gameplay.
       // System.out.println("| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | 1 | 2 | 3 | 4 | 5 |");
 
-      // Render loop - runs until it generates 30 rows.
-      for (int i = 0; i <= 30; i++) {
+      // Render loop - runs until it generates maxScore rows.
+      for (int i = 0; i <= maxScore; i++) {
         // Make sure game didn't alr finish on last render loop.
         if (status == 0) {
           // Check if any player is about to lose.
@@ -149,7 +150,7 @@ public class Main {
           // Draw mines
           else if (contains(posMines, i)) {
             System.out.print("| x ");
-          } else if (i == 30) {
+          } else if (i == maxScore) {
             System.out.println("|");
           } else {
             System.out.print("|   ");
@@ -214,9 +215,9 @@ public class Main {
     }
 
     // check score and print winner - end game
-    if (posPlayer[0] >= 30) {
+    if (posPlayer[0] >= maxScore) {
       System.out.println("Player 1 Wins!");
-    } else if (posPlayer[1] >= 30) {
+    } else if (posPlayer[1] >= maxScore) {
       System.out.println("Player 2 Wins!");
     }
   }
