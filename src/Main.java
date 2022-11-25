@@ -136,16 +136,26 @@ public class Main {
           else if (
             posPlayer[1] == posPlayer[0] && posPlayer[0] == i && fix == 0
           ) {
-            System.out.print("| " + (turn + 1) + " ");
+            if (partyMode == 1)
+              System.out.print("| " + COLORS[rnd.nextInt(6)] + (turn + 1) + ANSI_RESET + " ");
+            else
+              System.out.print("| " + (turn + 1) + " ");
+
             fix = 1;
           }
           // Draw player 2
           else if (posPlayer[1] == i && posPlayer[1] != posPlayer[0]) {
-            System.out.print("| 2 ");
+            if (partyMode == 1)
+              System.out.print("| " + COLORS[rnd.nextInt(6)] +"2 " + ANSI_RESET);
+            else
+              System.out.print("| 2 ");
           }
           // Draw player 1
           else if (posPlayer[0] == i && posPlayer[1] != posPlayer[0]) {
-            System.out.print("| 1 ");
+            if (partyMode == 1)
+              System.out.print("| " + COLORS[rnd.nextInt(6)] +"1 " + ANSI_RESET);
+            else
+              System.out.print("| 1 ");
           }
           // Draw mines
           else if (contains(posMines, i)) {
